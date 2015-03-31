@@ -50,6 +50,7 @@ void Service::process(std::shared_ptr<Channel>c, const std::string &message)
 	if (request->empty()) {
 		/* TODO: somehow signal this condition
 		   to HTTP-like transports */
+		clean_up(request);
 		return;
 	}
 
@@ -143,7 +144,11 @@ void Service::on_request_completed(Request *r)
 	std::shared_ptr<Channel>c = _channels[r];
 	c->send(response.toStyledString());
 
-	/* Clean up */
+	clean_up(r);
+}
+
+void Service::clean_up(Request *r)
+{
 	_channels.erase(r);
 	delete r;
 }
