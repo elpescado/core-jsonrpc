@@ -33,8 +33,8 @@ all: run_tests etest
 run_tests: gtest/gtest_main.o $(OBJECTS)
 	$(CXX) $(LDFLAGS) gtest/gtest_main.o $(OBJECTS) -o $@
 
-etest: etest.o $(OBJECTS)
-	$(CXX) $(LDFLAGS) etest.o $(OBJECTS) -o $@
+etest: jsonrpc/etest.o $(OBJECTS)
+	$(CXX) $(LDFLAGS) jsonrpc/etest.o $(OBJECTS) -o $@
 
 clean:
 	rm -f $(OBJECTS)
