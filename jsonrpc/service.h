@@ -9,7 +9,7 @@
 #include "handler.h"
 #include "request.h"
 
-namespace code {
+namespace core {
 namespace jsonrpc {
 
 

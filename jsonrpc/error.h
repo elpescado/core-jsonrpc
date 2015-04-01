@@ -4,7 +4,7 @@
 #include <string>
 #include <json/value.h>
 
-namespace code {
+namespace core {
 namespace jsonrpc {
 
 

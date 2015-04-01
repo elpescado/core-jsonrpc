@@ -5,7 +5,7 @@
 
 #include <boost/signals2.hpp>
 
-namespace code {
+namespace core {
 namespace jsonrpc {
 
 

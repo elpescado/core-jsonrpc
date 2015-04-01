@@ -8,7 +8,7 @@
 #include "handler.h"
 #include "service.h"
 
-using namespace code::jsonrpc;
+using namespace core::jsonrpc;
 
 
 template<class T, class...Args>

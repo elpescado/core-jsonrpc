@@ -12,7 +12,7 @@
 #include "handler.h"
 #include "service.h"
 
-using namespace code::jsonrpc;
+using namespace core::jsonrpc;
 
 namespace json {
 	class string {

@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-using namespace code::jsonrpc;
+using namespace core::jsonrpc;
 
 void Service::add_handler(const std::string &name, std::unique_ptr<AbstractHandler>&& handler)
 {

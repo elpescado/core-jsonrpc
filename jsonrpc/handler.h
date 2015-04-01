@@ -8,7 +8,7 @@
 
 #include "result.h"
 
-namespace code {
+namespace core {
 namespace jsonrpc {
 
 class AbstractHandler

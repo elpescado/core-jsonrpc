@@ -2,7 +2,7 @@
 
 #include "request.h"
 
-using namespace code::jsonrpc;
+using namespace core::jsonrpc;
 
 
 TEST(RequestTest, TestCompleted)

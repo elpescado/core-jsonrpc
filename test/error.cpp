@@ -2,7 +2,7 @@
 
 #include "error.h"
 
-using namespace code::jsonrpc;
+using namespace core::jsonrpc;
 
 TEST(ErrorTest, TestConstructor)
 {

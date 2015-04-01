@@ -1,6 +1,6 @@
 #include "handler.h"
 
-using namespace code::jsonrpc;
+using namespace core::jsonrpc;
 
 Handler::Handler(std::function<void(std::shared_ptr<Result>, const Json::Value &)> function)
 	: _func{function}

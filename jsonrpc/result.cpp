@@ -1,6 +1,6 @@
 #include "result.h"
 
-using namespace code::jsonrpc;
+using namespace core::jsonrpc;
 
 
 Result::Result(const Json::Value &id)

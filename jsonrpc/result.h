@@ -9,7 +9,7 @@
 
 #include "error.h"
 
-namespace code {
+namespace core {
 namespace jsonrpc {
 
 enum class ResultState {

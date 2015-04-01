@@ -6,7 +6,7 @@
 
 #include "service.h"
 
-using namespace code::jsonrpc;
+using namespace core::jsonrpc;
 
 class ServiceTestStub : public Service
 {
