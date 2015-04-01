@@ -14,8 +14,8 @@ TEST(RequestTest, TestCompleted)
 	});
 
 	Handler h([](std::shared_ptr<Result> , const Json::Value &){});
-	r.add(&h, Json::Value("1"), Json::Value(Json::arrayValue));
-	r.add(&h, Json::Value("2"), Json::Value(Json::arrayValue));
+	r.add(std::make_shared<Result>(1));
+	r.add(std::make_shared<Result>(2));
 
 	r.results()[0]->set_result("ttt");
 	ASSERT_EQ(false,completed);

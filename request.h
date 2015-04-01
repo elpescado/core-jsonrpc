@@ -24,12 +24,11 @@ class Request {
 	Request(bool);
 	const std::vector<std::shared_ptr<Result>> &results() const { return _results; }
 
-	void add(Handler *h, const Json::Value &id, const Json::Value &args);
 	void add(std::shared_ptr<Result> result);
 
 	bool empty() const noexcept { return _results.empty(); }
 	bool completed() const noexcept
-	{ return _completed == _results.size(); }
+		{ return _completed == _results.size(); }
 	bool return_as_array() const noexcept { return _return_as_array; }
 
 	boost::signals2::signal<void()> signal_completed;
