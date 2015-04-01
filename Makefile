@@ -1,15 +1,17 @@
 CXX=clang++
 
-CXXFLAGS=-g -Wall -std=c++11 -I/usr/local/include -I/usr/local/include/jsoncpp -I.
+CXXFLAGS=-g -Wall -std=c++11 -I/usr/local/include -I/usr/local/include/jsoncpp -I./jsonrpc -I.
 LDFLAGS=-g -std=c++11 -L/usr/local/lib -ljsoncpp
 
-SOURCES=\
+JSONRPC=\
 	channel.cpp \
 	error.cpp \
 	handler.cpp \
 	request.cpp \
 	result.cpp \
 	service.cpp \
+
+TESTS=\
 	test/channel.cpp \
 	test/error.cpp \
 	test/handler.cpp \
@@ -18,6 +20,8 @@ SOURCES=\
 	test/result.cpp \
 	test/service.cpp \
 	gtest/gtest-all.cc
+
+SOURCES=$(JSONRPC:%=jsonrpc/%) $(TESTS)
 
 CC_SOURCES :=  $(filter %.cc, $(SOURCES))
 CPP_SOURCES := $(filter %.cpp, $(SOURCES))
