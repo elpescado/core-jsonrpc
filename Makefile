@@ -1,7 +1,7 @@
 CXX=clang++
 
 CXXFLAGS=-g -Wall -std=c++11 -I/usr/local/include -I/usr/local/include/jsoncpp -I./jsonrpc -I.
-LDFLAGS=-g -std=c++11 -L/usr/local/lib -ljsoncpp
+LDFLAGS=-g -std=c++11 -L/usr/local/lib -ljsoncpp -lwebsockets
 
 JSONRPC=\
 	client.cpp \
@@ -10,7 +10,9 @@ JSONRPC=\
 	handler.cpp \
 	request.cpp \
 	result.cpp \
+	server.cpp \
 	service.cpp \
+	lws-server.cpp \
 
 TESTS=\
 	test/client.cpp \
@@ -30,13 +32,17 @@ CPP_SOURCES := $(filter %.cpp, $(SOURCES))
 
 OBJECTS := $(patsubst %.cpp,%.o,$(CPP_SOURCES)) $(patsubst %.cc,%.o,$(CC_SOURCES))
 
-all: run_tests etest
+all: run_tests etest lws
 
 run_tests: gtest/gtest_main.o $(OBJECTS)
 	$(CXX) $(LDFLAGS) gtest/gtest_main.o $(OBJECTS) -o $@
 
 etest: jsonrpc/etest.o $(OBJECTS)
 	$(CXX) $(LDFLAGS) jsonrpc/etest.o $(OBJECTS) -o $@
+
+lws: jsonrpc/lws.o $(OBJECTS)
+	$(CXX) $(LDFLAGS) jsonrpc/lws.o $(OBJECTS) -o $@
+
 
 clean:
 	rm -f $(OBJECTS)
