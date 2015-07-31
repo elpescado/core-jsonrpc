@@ -1,52 +1,68 @@
+#include "client.h"
+
 #include <iostream>
 
-#include <json/value.h>
-#include <json/reader.h>
+using namespace core::jsonrpc;
 
-
-template<typename T>
-void serialize_params(Json::Value &value, T param)
-{
-	value.append(Json::Value(param));	
-}
-template<typename T0, typename... T>
-void serialize_params(Json::Value &value, T0 param0, T... params)
-{
-	value.append(Json::Value(param0));
-	serialize_params<T...>(value, params...);
-}
-
-
-template<class X>
-class RemoteProcedure;
-
-template<typename R, typename... T>
-class RemoteProcedure<R(T...)>
-{
-	public:
-		R operator() (T... params) {
-			Json::Value json_params;
-			serialize_params(json_params, params...);
-			std::cout << "f() params = " << json_params.toStyledString() << std::endl;
-			return static_cast<R>(0);
-		}
-};
-
-
-template<typename... T>
-void f(T... t, int u)
+Client::Client()
+	: _channel(nullptr)
 {
 }
 
-int main(int argc, char **argv)
+
+Client::Client(Channel &channel)
+	: _channel(&channel)
 {
-	RemoteProcedure<int(int)> f1;
-	f1(4);
-	f1(42);
-
-	RemoteProcedure<int(double, double)> f2;
-	f2(0.2, 0.3);
-	f2(0.5, 0.7);
-
-	f<int,int>(1,2,4);
 }
+
+
+Json::Value Client::call_method(const std::string &name,
+		                        const Json::Value &arguments)
+{
+	std::cerr << "Calling method " << name << 	" args = " << arguments.toStyledString() << std::endl;
+	Json::Value request = create_request(name, arguments);
+	request["id"] = next_id();
+	send_request(request);
+	return Json::Value();
+}
+
+void Client::call_notification(const std::string &name, const Json::Value &arguments)
+{
+	std::cerr << "Calling notification " << name << 	" args = " << arguments.toStyledString() << std::endl;
+	Json::Value request = create_request(name, arguments);
+	send_request(request);
+}
+
+
+Json::Value Client::create_request(const std::string &name, const Json::Value &arguments)
+{
+	Json::Value root(Json::objectValue);
+	root["jsonrpc"] = "2.0";
+	root["method"] = name;
+	root["params"] = arguments;
+	return root;
+}
+
+void Client::send_request(const Json::Value &request)
+{
+	std::cerr << "--> " << request.toStyledString() << std::endl;
+
+	if (_channel) {
+		_channel->send(request.toStyledString());
+	}
+}
+
+
+///
+
+ProcedureBase::ProcedureBase(Client &c, const std::string &name)
+	: _client(&c), _name(name)
+{
+}
+
+void ProcedureBase::invoke(const Json::Value &args)
+{
+	_client->call_method(_name, args);
+}
+
+

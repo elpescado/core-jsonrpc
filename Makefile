@@ -4,6 +4,7 @@ CXXFLAGS=-g -Wall -std=c++11 -I/usr/local/include -I/usr/local/include/jsoncpp -
 LDFLAGS=-g -std=c++11 -L/usr/local/lib -ljsoncpp
 
 JSONRPC=\
+	client.cpp \
 	channel.cpp \
 	error.cpp \
 	handler.cpp \
@@ -12,6 +13,7 @@ JSONRPC=\
 	service.cpp \
 
 TESTS=\
+	test/client.cpp \
 	test/channel.cpp \
 	test/error.cpp \
 	test/handler.cpp \
