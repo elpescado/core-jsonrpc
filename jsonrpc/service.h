@@ -28,6 +28,7 @@ class Service {
 	void process_single_entry(Request &request, const Json::Value &entry);
 	bool validate_request(const Json::Value &request);
 	void clean_up(Request *r);
+
 };
 
 

@@ -4,10 +4,12 @@ CXXFLAGS=-g -Wall -std=c++11 -I/usr/local/include -I/usr/local/include/jsoncpp -
 LDFLAGS=-g -std=c++11 -L/usr/local/lib -ljsoncpp -lwebsockets
 
 JSONRPC=\
+	buffer-channel.cpp \
 	client.cpp \
 	channel.cpp \
 	error.cpp \
 	handler.cpp \
+	memory-channel.cpp \
 	request.cpp \
 	result.cpp \
 	server.cpp \
@@ -15,11 +17,13 @@ JSONRPC=\
 	lws-server.cpp \
 
 TESTS=\
+	test/buffer-channel.cpp \
 	test/client.cpp \
 	test/channel.cpp \
 	test/error.cpp \
 	test/handler.cpp \
 	test/integration.cpp \
+	test/memory-channel.cpp \
 	test/request.cpp \
 	test/result.cpp \
 	test/service.cpp \

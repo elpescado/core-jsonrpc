@@ -13,6 +13,9 @@ Client::Client()
 Client::Client(Channel &channel)
 	: _channel(&channel)
 {
+	_channel->signal_message.connect(
+		boost::bind(&Client::on_message, this, _1)
+	);
 }
 
 
@@ -50,6 +53,12 @@ void Client::send_request(const Json::Value &request)
 	if (_channel) {
 		_channel->send(request.toStyledString());
 	}
+}
+
+
+void Client::on_message(std::string message)
+{
+	std::cerr << "<-- " << message << std::endl;
 }
 
 

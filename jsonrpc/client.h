@@ -90,6 +90,9 @@ class Client {
 	Json::Value create_request(const std::string &name, const Json::Value &arguments);
 
 	void send_request(const Json::Value &request);
+
+	protected:
+	void on_message(std::string msg);
 };
 
 
